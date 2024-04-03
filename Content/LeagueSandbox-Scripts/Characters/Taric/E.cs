@@ -2,26 +2,24 @@ namespace Spells
 {
     public class Dazzle : ISpellScript
     {
-        public SpellScriptMetadata ScriptMetadata { get; private set; } = new SpellScriptMetadata()
+        public SpellScriptMetadata ScriptMetadata => new SpellScriptMetadata()
         {
-            TriggersSpellCasts = true
-            // TODO
+            TriggersSpellCasts = true,
+            IsDamagingSpell = true,
+            MissileParameters = new MissileParameters
+            {
+                Type = MissileType.Target
+            }
         };
 
-        public void OnSpellPostCast(Spell spell)
+        public void OnActivate(ObjAIBase owner, Spell spell)
         {
-            if (Vector2.DistanceSquared(spell.CastInfo.Owner.Position, spell.CastInfo.Targets[0].Unit.Position) > 625 * 625)
-            {
-                return;
-            }
-            else
-            {
-                //spell.AddProjectileTarget("Dazzle", spell.CastInfo.SpellCastLaunchPosition, spell.CastInfo.Targets[0].Unit, HitResult.HIT_Normal, true);
-            }
+            ApiEventManager.OnSpellHit.AddListener(this, spell, TargetExecute, false);
         }
 
-        public void ApplyEffects(ObjAIBase owner, AttackableUnit target, Spell spell, SpellMissile missile)
+        public void TargetExecute(Spell spell, AttackableUnit target, SpellMissile missile, SpellSector sector)
         {
+            var owner = spell.CastInfo.Owner as Champion;
             var time = 1.1f + (0.1f * spell.CastInfo.SpellLevel);
             var ap = owner.Stats.AbilityPower.Total;
             var damage = 10 + (spell.CastInfo.SpellLevel * 30) + (ap * 0.2f);
@@ -37,9 +35,11 @@ namespace Spells
 
             target.TakeDamage(owner, damage, DamageType.DAMAGE_TYPE_MAGICAL, DamageSource.DAMAGE_SOURCE_SPELL, false);
 
-            AddBuff("TaricEHud", time, 1, spell, target, owner);
-            AddBuff("Stun", time, 1, spell, target, owner);
-            AddParticleTarget(owner, target, "Dazzle_tar", target);
+
+            AddParticleTarget(owner, target, "Dazzle_tar.troy", target);
+
+            AddBuff("TaricEHud", time, 1, spell, target, owner, false);
+            AddBuff("Stun", time, 1, spell, target, owner, false);
             var p103 = AddParticleTarget(owner, target, "Taric_HammerFlare", target);
 
             CreateTimer(time, () =>
@@ -49,5 +49,7 @@ namespace Spells
 
             missile.SetToRemove();
         }
+
+
     }
 }
