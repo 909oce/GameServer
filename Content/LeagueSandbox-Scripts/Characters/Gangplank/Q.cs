@@ -32,7 +32,7 @@ namespace Spells
                 target.TakeDamage(owner, damage, DamageType.DAMAGE_TYPE_PHYSICAL, DamageSource.DAMAGE_SOURCE_ATTACK,
                     false);
 
-                AddBuff("GrogSoakedBlade", 3f, 1, spell, target, owner, false);
+                AddBuff("Scurvy", 3f, 1, spell, target, owner, false);
 
                 if (target.IsDead)
                 {

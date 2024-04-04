@@ -4,7 +4,7 @@ namespace Buffs
     {
         public BuffScriptMetaData BuffMetaData { get; set; } = new BuffScriptMetaData
         {
-            BuffType = BuffType.COMBAT_DEHANCER
+            BuffType = BuffType.COMBAT_ENCHANCER
         };
 
         public StatsModifier StatsModifier { get; private set; } = new StatsModifier();

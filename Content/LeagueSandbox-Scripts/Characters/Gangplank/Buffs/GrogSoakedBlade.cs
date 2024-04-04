@@ -1,6 +1,6 @@
 ﻿namespace Buffs
 {
-    internal class GrogSoakedBlade : IBuffGameScript
+    internal class Scurvy : IBuffGameScript
     {
         public BuffScriptMetaData BuffMetaData { get; set; } = new BuffScriptMetaData
         {
@@ -22,7 +22,7 @@
             owner = ownerSpell.CastInfo.Owner as Champion;
             Unit = unit;
             var Level = owner.Stats.Level;
-            damage = (ownerSpell.CastInfo.Owner.Stats.Level + 3) * unit.GetBuffWithName("GrogSoakedBlade").StackCount;
+            damage = (ownerSpell.CastInfo.Owner.Stats.Level + 3) * unit.GetBuffWithName("Scurvy").StackCount;
             StatsModifier.MoveSpeed.PercentBonus -= 0.07f;
             unit.AddStatModifier(StatsModifier);
         }

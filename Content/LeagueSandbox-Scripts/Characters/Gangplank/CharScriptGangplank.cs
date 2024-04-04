@@ -14,7 +14,7 @@
             Target = spell.CastInfo.Targets[0].Unit;
             if (!(Target is ObjBuilding || Target is BaseTurret))
             {
-                AddBuff("GrogSoakedBlade", 3f, 1, spell, Target, Gangplank);
+                AddBuff("Scurvy", 3f, 1, spell, Target, Gangplank);
             }
         }
     }
