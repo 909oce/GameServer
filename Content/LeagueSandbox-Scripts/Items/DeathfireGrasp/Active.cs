@@ -12,7 +12,9 @@
             SpellCastItem(owner, "DeathfireGraspSpell", true, target, Vector2.Zero);
         }
     }
-
+}
+namespace Spells
+{
     public class DeathfireGraspSpell : ISpellScript
     {
         public SpellScriptMetadata ScriptMetadata { get; private set; } = new SpellScriptMetadata()
@@ -21,7 +23,6 @@
             {
                 Type = MissileType.Target
             }
-            // TODO
         };
 
         public void OnSpellPreCast(ObjAIBase owner, Spell spell, AttackableUnit target, Vector2 start, Vector2 end)

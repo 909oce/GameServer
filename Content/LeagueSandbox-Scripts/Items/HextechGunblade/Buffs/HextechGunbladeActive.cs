@@ -15,10 +15,7 @@
             var owner = ownerSpell.CastInfo.Owner;
             StatsModifier.MoveSpeed.PercentBonus = -0.4f;
             p = AddParticleTarget(ownerSpell.CastInfo.Owner, unit, "Global_Slow.troy", unit, lifetime: buff.Duration);
-          //StatsModifier.CooldownReduction.FlatBonus = 10f;
-
             unit.AddStatModifier(StatsModifier);
-            //TODO: CooldownReduction
         }
 
         public void OnDeactivate(AttackableUnit unit, Buff buff, Spell ownerSpell)

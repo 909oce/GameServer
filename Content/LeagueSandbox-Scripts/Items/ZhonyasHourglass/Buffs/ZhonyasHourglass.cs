@@ -1,6 +1,6 @@
 namespace Buffs
 {
-    internal class ZhonyasHourglass : IBuffGameScript
+    internal class WoogletsWitchcap : IBuffGameScript
     {
         Spell Item;
         Particle Gold;

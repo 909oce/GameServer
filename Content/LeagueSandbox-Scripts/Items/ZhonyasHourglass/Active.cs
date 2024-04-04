@@ -8,7 +8,7 @@ namespace ItemSpells
         };
         public void OnSpellPreCast(ObjAIBase owner, Spell spell, AttackableUnit target, Vector2 start, Vector2 end)
         {
-            AddBuff("ZhonyasHourglass", 2.5f, 1, spell, owner, owner, false);
+            AddBuff("WoogletsWitchcap", 2.5f, 1, spell, owner, owner, false);
         }
     }
 }
