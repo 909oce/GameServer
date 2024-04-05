@@ -1,6 +1,6 @@
 namespace Spells
 {
-    public class JudicatorReckoning : ISpellScript
+    public class PantheonQ : ISpellScript
     {
         public SpellScriptMetadata ScriptMetadata => new SpellScriptMetadata()
         {
@@ -15,22 +15,13 @@ namespace Spells
         {
             ApiEventManager.OnSpellHit.AddListener(this, spell, TargetExecute, false);
         }
-
         public void TargetExecute(Spell spell, AttackableUnit target, SpellMissile missile, SpellSector sector)
         {
             var owner = spell.CastInfo.Owner as Champion;
-
-            var ap = owner.Stats.AbilityPower.Total * 0.4f;
-           
-            var damage = 60 * spell.CastInfo.SpellLevel + ap ;
-
-            target.TakeDamage(owner, damage, DamageType.DAMAGE_TYPE_MAGICAL, DamageSource.DAMAGE_SOURCE_SPELL, false);
-
-
-            AddParticleTarget(owner, target, "Reckoning_mis.troy", target);
-
-            AddBuff("JudicatorReckoning", 3f, 1, spell, target, owner, false);
-            AddBuff("JudicatorHolyFervorDebuff", 5f, 1, spell, target, owner, false);
+            var ADratio = owner.Stats.AttackDamage.FlatBonus*1.4f;
+            var damage = 65*spell.CastInfo.SpellLevel  + ADratio;
+            target.TakeDamage(owner, damage, DamageType.DAMAGE_TYPE_PHYSICAL, DamageSource.DAMAGE_SOURCE_SPELL, false);
+            AddParticleTarget(owner, target, "Pantheon_Base_Q_mis.troy", target, 1f);
         }
     }
 }
