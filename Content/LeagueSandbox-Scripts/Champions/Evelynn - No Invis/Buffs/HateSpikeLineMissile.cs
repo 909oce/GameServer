@@ -26,7 +26,7 @@ namespace Buffs
                 //SpellCast(Evelynn, 3, SpellSlotType.ExtraSlots, false, Unit.Position, Unit.Position ,Vector2.Zero);
                 Minion a = AddMinion(Evelynn, "TestCube", "TestCube", Evelynn.Position, Evelynn.Team, Evelynn.SkinID, true, false);
                 FaceDirection(Unit.Position, a);
-                AddBuff("Hate", 0.3f, 1, spell, a, Evelynn, false);
+                AddBuff("HateSpikeLine", 0.3f, 1, spell, a, Evelynn, false);
                 ForceMovement(a, null, GetPointFromUnit(a, 650), 2200, 0, 0, 0);
             }
             else

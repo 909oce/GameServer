@@ -1,6 +1,6 @@
 namespace Spells
 {
-    public class MalphiteBasicAttack : ISpellScript
+    public class EvelynnBasicAttack : ISpellScript
     {
         public SpellScriptMetadata ScriptMetadata { get; private set; } = new SpellScriptMetadata()
         {
@@ -12,7 +12,7 @@ namespace Spells
         {
         }
     }
-    public class MalphiteBasicAttack2 : ISpellScript
+    public class EvelynnBasicAttack2 : ISpellScript
     {
         public SpellScriptMetadata ScriptMetadata { get; private set; } = new SpellScriptMetadata()
         {
@@ -24,7 +24,7 @@ namespace Spells
         {
         }
     }
-    public class MalphiteCritAttack : ISpellScript
+    public class EvelynnBasicAttack3 : ISpellScript
     {
         public SpellScriptMetadata ScriptMetadata { get; private set; } = new SpellScriptMetadata()
         {
@@ -36,7 +36,7 @@ namespace Spells
         {
         }
     }
-    public class ObduracyAttack : ISpellScript
+    public class EvelynnCritAttack : ISpellScript
     {
         public SpellScriptMetadata ScriptMetadata { get; private set; } = new SpellScriptMetadata()
         {
@@ -49,4 +49,3 @@ namespace Spells
         }
     }
 }
-

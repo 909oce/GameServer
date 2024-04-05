@@ -1,6 +1,6 @@
 namespace Buffs
 {
-    class Hate : IBuffGameScript
+    class HateSpikeLine : IBuffGameScript
     {
         float T = 0;
         AttackableUnit Unit;

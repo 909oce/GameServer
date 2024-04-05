@@ -1,23 +1,5 @@
-
-
-using static LeagueSandbox.GameServer.API.ApiFunctionManager;
-using LeagueSandbox.GameServer.Scripting.CSharp;
-
-using GameServerCore.Enums;
-using LeagueSandbox.GameServer.API;
-using GameServerCore.Scripting.CSharp;
-using LeagueSandbox.GameServer.GameObjects.AttackableUnits.AI;
-using LeagueSandbox.GameServer.GameObjects.SpellNS;
-using LeagueSandbox.GameServer.GameObjects.AttackableUnits;
-using LeagueSandbox.GameServer.GameObjects.SpellNS.Missile;
-using LeagueSandbox.GameServer.GameObjects.SpellNS.Sector;
-using LeagueSandbox.GameServer.GameObjects.AttackableUnits.Buildings;
-using LeagueSandbox.GameServer.GameObjects.AttackableUnits.Buildings.AnimatedBuildings;
-
-
 namespace Spells
 {
-
     public class BrandConflagration : ISpellScript
     {
         public SpellScriptMetadata ScriptMetadata => new SpellScriptMetadata()
@@ -25,9 +7,6 @@ namespace Spells
             TriggersSpellCasts = true,
             IsDamagingSpell = true,
         };
-
-        
-
         public void OnSpellCast(Spell spell)
         {
             var owner = spell.CastInfo.Owner as Champion;
@@ -51,8 +30,6 @@ namespace Spells
             AddParticleTarget(owner, owner, "BrandConflagration_cas.troy", owner, 1f, 1f);
             spell.CastInfo.Targets[0].Unit.TakeDamage(owner, damage, DamageType.DAMAGE_TYPE_MAGICAL, DamageSource.DAMAGE_SOURCE_PERIODIC, false);
         }
-
-      
     }
     public class BrandConflagrationMissile : ISpellScript
     {
@@ -76,12 +53,10 @@ namespace Spells
             var owner = spell.CastInfo.Owner as Champion;
             var APratio = owner.Stats.AbilityPower.Total * 0.55f;
             var damage = 70 * owner.Spells[2].CastInfo.SpellLevel + APratio;
-
             AddParticleTarget(owner, target, "BrandConflagration_tar.troy", target, 1f, 1f);
             AddParticleTarget(owner, owner, "BrandConflagration_cas.troy", owner, 1f, 1f);
             AddBuff("BrandPassive", 4f, 1, spell, target, owner, false);
             target.TakeDamage(owner, damage, DamageType.DAMAGE_TYPE_MAGICAL, DamageSource.DAMAGE_SOURCE_SPELL, false);
         }
-
     }
 }

@@ -11,14 +11,6 @@ namespace Spells
 
         public void OnSpellPreCast(ObjAIBase owner, Spell spell, AttackableUnit target, Vector2 start, Vector2 end)
         {
-            if (owner.HasBuff("FrostShot"))
-            {
-                OverrideAnimation(owner, "Spell1", "Attack1");
-            }
-            else
-            {
-                OverrideAnimation(owner, "Attack1", "Spell1");
-            }
         }
     }
     public class AsheBasicAttack2 : ISpellScript
@@ -32,14 +24,6 @@ namespace Spells
 
         public void OnSpellPreCast(ObjAIBase owner, Spell spell, AttackableUnit target, Vector2 start, Vector2 end)
         {
-            if (owner.HasBuff("FrostShot"))
-            {
-                OverrideAnimation(owner, "Spell1", "Attack2");
-            }
-            else
-            {
-                OverrideAnimation(owner, "Attack2", "Spell1");
-            }
         }
     }
     public class AsheCritAttack : ISpellScript
@@ -53,14 +37,6 @@ namespace Spells
 
         public void OnSpellPreCast(ObjAIBase owner, Spell spell, AttackableUnit target, Vector2 start, Vector2 end)
         {
-            if (owner.HasBuff("FrostShot"))
-            {
-                OverrideAnimation(owner, "Spell1", "Crit");
-            }
-            else
-            {
-                OverrideAnimation(owner, "Crit", "Spell1");
-            }
         }
     }
 }

@@ -1,6 +1,6 @@
 namespace Spells
 {
-    public class MalphiteBasicAttack : ISpellScript
+    public class AkaliBasicAttack : ISpellScript
     {
         public SpellScriptMetadata ScriptMetadata { get; private set; } = new SpellScriptMetadata()
         {
@@ -12,7 +12,7 @@ namespace Spells
         {
         }
     }
-    public class MalphiteBasicAttack2 : ISpellScript
+    public class AkaliBasicAttack2 : ISpellScript
     {
         public SpellScriptMetadata ScriptMetadata { get; private set; } = new SpellScriptMetadata()
         {
@@ -24,19 +24,7 @@ namespace Spells
         {
         }
     }
-    public class MalphiteCritAttack : ISpellScript
-    {
-        public SpellScriptMetadata ScriptMetadata { get; private set; } = new SpellScriptMetadata()
-        {
-            TriggersSpellCasts = true,
-            IsDamagingSpell = true
-        };
-
-        public void OnSpellPreCast(ObjAIBase owner, Spell spell, AttackableUnit target, Vector2 start, Vector2 end)
-        {
-        }
-    }
-    public class ObduracyAttack : ISpellScript
+    public class AkaliCritAttack : ISpellScript
     {
         public SpellScriptMetadata ScriptMetadata { get; private set; } = new SpellScriptMetadata()
         {
@@ -49,4 +37,3 @@ namespace Spells
         }
     }
 }
-
