@@ -835,35 +835,6 @@ namespace LeagueSandbox.GameServer.GameObjects.SpellNS
 
         public void ChannelCancelCheck()
         {
-            if (CastInfo.Owner.IsDead)
-            {
-                CastInfo.Owner.StopChanneling(ChannelingStopCondition.Cancel, ChannelingStopSource.Die);
-                return;
-            }
-
-            // TODO: Verify if this should only be checked at the start of channeling.
-            if (CastInfo.Owner.MovementParameters != null)
-            {
-                CastInfo.Owner.StopChanneling(ChannelingStopCondition.Cancel, ChannelingStopSource.Move);
-            }
-
-            // TODO: Verify if Taunted should be handled by the Taunt buff script instead.
-            var status = CastInfo.Owner.Status;
-            if (status.HasFlag(StatusFlags.Charmed)
-            || status.HasFlag(StatusFlags.Feared)
-            || status.HasFlag(StatusFlags.Silenced)
-            || status.HasFlag(StatusFlags.Stunned)
-            || status.HasFlag(StatusFlags.Suppressed)
-            || status.HasFlag(StatusFlags.Taunted))
-            {
-                CastInfo.Owner.StopChanneling(ChannelingStopCondition.Cancel, ChannelingStopSource.StunnedOrSilencedOrTaunted);
-            }
-
-            if (CastInfo.Targets.Count <= 0 || CastInfo.Targets[0].Unit == null)
-            {
-                CastInfo.Owner.StopChanneling(ChannelingStopCondition.Cancel, ChannelingStopSource.LostTarget);
-            }
-
             // Uncancellable
             if (SpellData.CantCancelWhileChanneling)
             {
@@ -874,19 +845,36 @@ namespace LeagueSandbox.GameServer.GameObjects.SpellNS
             {
                 var spellTarget = CastInfo.Targets[0].Unit;
 
-                if (spellTarget != null && (!spellTarget.IsVisibleByTeam(CastInfo.Owner.Team) || (!spellTarget.Status.HasFlag(StatusFlags.Targetable) && !spellTarget.CharData.IsUseable) || spellTarget.IsDead))
-
-
-
+                if (spellTarget != null
+                && !spellTarget.IsVisibleByTeam(CastInfo.Owner.Team))
                 {
                     CastInfo.Owner.StopChanneling(ChannelingStopCondition.Cancel, ChannelingStopSource.LostTarget);
                     return;
                 }
             }
 
+            var status = CastInfo.Owner.Status;
+
+            if (status == StatusFlags.Charmed
+            || status == StatusFlags.Feared
+            || status == StatusFlags.Silenced
+            || status == StatusFlags.Stunned
+            || status == StatusFlags.Suppressed
+            || status == StatusFlags.Taunted)
+            {
+                CastInfo.Owner.StopChanneling(ChannelingStopCondition.Cancel, ChannelingStopSource.StunnedOrSilencedOrTaunted);
+            }
+
+            if (CastInfo.Owner.IsDead)
+            {
+                CastInfo.Owner.StopChanneling(ChannelingStopCondition.Cancel, ChannelingStopSource.Die);
+                return;
+            }
+
             // TODO: ChannelingStopSource.HeroReincarnate
 
             var order = CastInfo.Owner.MoveOrder;
+
             if (!SpellData.CanMoveWhileChanneling
             && (order == OrderType.MoveTo
                 || order == OrderType.AttackMove
@@ -910,10 +898,10 @@ namespace LeagueSandbox.GameServer.GameObjects.SpellNS
                 return;
             }
 
-            var castSpell = CastInfo.Owner.GetCastSpell();
-            if (castSpell != null
-            && !castSpell.SpellData.DoesntBreakChannels
-            && order == OrderType.CastSpell)
+            if (CastInfo.Owner.GetCastSpell() != null
+            && !CastInfo.Owner.GetCastSpell().SpellData.DoesntBreakChannels
+            && (order == OrderType.CastSpell
+            || order == OrderType.TempCastSpell))
             {
                 CastInfo.Owner.StopChanneling(ChannelingStopCondition.Cancel, ChannelingStopSource.Casting);
                 return;
@@ -931,12 +919,6 @@ namespace LeagueSandbox.GameServer.GameObjects.SpellNS
                 // For some reason this is the packet used for manually cancelling channels.
                 _game.PacketNotifier.NotifyNPC_InstantStop_Attack(CastInfo.Owner, false);
 
-                if (CastInfo.Owner.ChannelSpell == this)
-                {
-                    CastInfo.Owner.SetChannelSpell(null);
-                }
-
-                CastInfo.Owner.UpdateMoveOrder(OrderType.Hold, true);
                 // TODO: Find out how League calculates cooldown reduction for incomplete channels (assuming it isn't done in-script).
             }
 
