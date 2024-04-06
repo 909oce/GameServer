@@ -1,3 +1,14 @@
+namespace Spells
+{
+    public class FioraFlurryDummy : ISpellScript
+    {
+        public SpellScriptMetadata ScriptMetadata { get; private set; } = new SpellScriptMetadata()
+        {
+            TriggersSpellCasts = true,
+            IsDamagingSpell = true
+        };
+    }
+}
 namespace Buffs
 {
     internal class FioraFlurryDummy : IBuffGameScript

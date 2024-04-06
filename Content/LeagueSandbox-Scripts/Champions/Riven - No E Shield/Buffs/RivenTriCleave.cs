@@ -13,7 +13,6 @@ namespace Buffs
         public void OnActivate(AttackableUnit unit, Buff buff, Spell ownerSpell)
         {
             buff.SetStatusEffect(StatusFlags.Ghosted, true);
-            LogDebug("activate");
             if (unit.HasBuff("RivenTriCleave"))
             {
                 LogDebug(buff.StackCount.ToString());
@@ -32,7 +31,6 @@ namespace Buffs
             TrueCooldown = 13 * (1 + unit.Stats.CooldownReduction.Total);
             ownerSpell.SetCooldown(TrueCooldown, true);
             buff.SetStatusEffect(StatusFlags.Ghosted, false);
-            LogDebug("deactivate");
         }
     }
 }
