@@ -25,12 +25,9 @@
             owner.StopMovement();
 
             var spellPos = new Vector2(spell.CastInfo.TargetPosition.X, spell.CastInfo.TargetPosition.Z);
-            var mushroom = AddMinion(owner, "TeemoMushroom", "TeemoMushroom", spellPos);
+            var mushroom = AddMinion(owner, "TestCubeRender", "TestCubeRender", spellPos);
 
             var Champs = GetChampionsInRange(owner.Position, 50000, true);
-            mushroom.SetCollisionRadius(0.0f);
-            mushroom.SetStatus(StatusFlags.Targetable, false);
-            mushroom.SetStatus(StatusFlags.Ghosted, true);
 
             var sec = spell.CreateSpellSector(new SectorParameters
             {
@@ -87,5 +84,14 @@
             }
             CreateTimer(7.0f, () => { mushroom.TakeDamage(owner, 50000, DamageType.DAMAGE_TYPE_TRUE, DamageSource.DAMAGE_SOURCE_INTERNALRAW, false); sec.SetToRemove(); });
         }
+    }
+}
+namespace Spells
+{
+    public class CannonBarrageBall : ISpellScript
+    {
+        public SpellScriptMetadata ScriptMetadata => new SpellScriptMetadata()
+        {
+        };
     }
 }

@@ -10,7 +10,7 @@ namespace Spells
         {
             Akali = spell.CastInfo.Owner as Champion;
             Pos = new Vector2(spell.CastInfo.TargetPosition.X, spell.CastInfo.TargetPosition.Z);
-            Smoke = AddMinion(Akali, "TestCube", "TestCube", Pos, Akali.Team, Akali.SkinID, true, false);
+            Smoke = AddMinion(Akali, "TestCubeRender", "TestCubeRender", Pos, Akali.Team, Akali.SkinID, true, false);
             AddBuff("AkaliSmokeBomb", 8f, 1, spell, Smoke, Akali);
         }
     }

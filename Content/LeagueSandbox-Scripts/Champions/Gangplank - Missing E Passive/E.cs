@@ -9,11 +9,11 @@ namespace Spells
 
         public void OnSpellPostCast(Spell spell)
         {
-            var hasbuff = spell.CastInfo.Owner.HasBuff("RaiseMoraleActive");
+            var hasbuff = spell.CastInfo.Owner.HasBuff("RaiseMorale");
 
             if (hasbuff == false)
             {
-                AddBuff("RaiseMoraleActive", 7.0f, 1, spell, spell.CastInfo.Owner, spell.CastInfo.Owner);
+                AddBuff("RaiseMorale", 7.0f, 1, spell, spell.CastInfo.Owner, spell.CastInfo.Owner);
             }
 
             var units = GetUnitsInRange(spell.CastInfo.Owner.Position, 1000, true).Where(x => x.Team != CustomConvert.GetEnemyTeam(spell.CastInfo.Owner.Team));
@@ -22,7 +22,7 @@ namespace Spells
             {
                 if (allyTarget is AttackableUnit && spell.CastInfo.Owner != allyTarget && hasbuff == false)
                 {
-                    AddBuff("RaiseMoraleActive", 7.0f, 1, spell, allyTarget, spell.CastInfo.Owner);
+                    AddBuff("RaiseMorale", 7.0f, 1, spell, allyTarget, spell.CastInfo.Owner);
                 }
             }
         }

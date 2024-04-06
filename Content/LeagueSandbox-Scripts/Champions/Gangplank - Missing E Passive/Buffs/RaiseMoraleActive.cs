@@ -1,6 +1,6 @@
 namespace Buffs
 {
-    internal class RaiseMoraleActive : IBuffGameScript
+    internal class RaiseMorale : IBuffGameScript
     {
         public BuffScriptMetaData BuffMetaData { get; set; } = new BuffScriptMetaData
         {

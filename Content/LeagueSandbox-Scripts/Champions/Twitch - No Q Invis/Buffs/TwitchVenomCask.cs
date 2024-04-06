@@ -53,10 +53,7 @@ namespace Buffs
                 {
                     if (units[i].Team != Twitch.Team && !(units[i] is ObjBuilding || units[i] is BaseTurret))
                     {
-                        AddBuff("", 2.5f, 1, W, units[i], Twitch, false);
-                        //AddParticleTarget(Twitch, units[i], "MissFortune_Base_E_Unit_Tar", units[i],10);
-                        //units[i].TakeDamage(Twitch, damage, DamageType.DAMAGE_TYPE_MAGICAL,DamageSource.DAMAGE_SOURCE_SPELLAOE, false);
-                        //AddParticleTarget(Twitch, units[i], "Ekko_Base_W_Shield_HitDodge", units[i]);
+                        AddBuff("TwitchDeadlyVenom", 2.5f, 1, W, units[i], Twitch, false);
                     }
                 }
             }

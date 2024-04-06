@@ -50,7 +50,7 @@ namespace Spells
         public void OnMissileEnd(SpellMissile missile)
         {
             Missile = missile;
-            Minion W = AddMinion(Twitch, "TestCube", "TestCube", Missile.Position, Twitch.Team, Twitch.SkinID, true, false);
+            Minion W = AddMinion(Twitch, "TestCubeRender", "TestCubeRender", Missile.Position, Twitch.Team, Twitch.SkinID, true, false);
             AddBuff("TwitchVenomCask", 3f, 1, Cask, W, Twitch, false);
         }
     }

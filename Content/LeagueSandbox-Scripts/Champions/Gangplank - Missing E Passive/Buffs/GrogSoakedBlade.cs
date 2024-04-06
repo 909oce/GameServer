@@ -1,4 +1,13 @@
-﻿namespace Buffs
+﻿namespace Spells
+{
+    public class ScurvyStrike : ISpellScript
+    {
+        public SpellScriptMetadata ScriptMetadata { get; private set; } = new SpellScriptMetadata()
+        {
+        };
+    }
+}
+namespace Buffs
 {
     internal class Scurvy : IBuffGameScript
     {
