@@ -6,12 +6,8 @@ namespace Spells
         {
             TriggersSpellCasts = true,
             IsDamagingSpell = true,
-            MissileParameters = new MissileParameters
-            {
-                Type = MissileType.Target
-            }
+            MissileParameters = new MissileParameters { Type = MissileType.Target }
         };
-
         public void OnActivate(ObjAIBase owner, Spell spell)
         {
             ApiEventManager.OnSpellHit.AddListener(this, spell, TargetExecute, false);
@@ -32,24 +28,19 @@ namespace Spells
             {
                 damage = 20 + (spell.CastInfo.SpellLevel * 60) + (ap * 0.4f);
             }
-
             target.TakeDamage(owner, damage, DamageType.DAMAGE_TYPE_MAGICAL, DamageSource.DAMAGE_SOURCE_SPELL, false);
-
-
-            AddParticleTarget(owner, target, "Dazzle_tar.troy", target);
-
-            AddBuff("TaricEHud", time, 1, spell, target, owner, false);
             AddBuff("Stun", time, 1, spell, target, owner, false);
-            var p103 = AddParticleTarget(owner, target, "Taric_HammerFlare", target);
-
-            CreateTimer(time, () =>
-            {
-                RemoveParticle(p103);
-            });
-
+            AddBuff("TaricEHud", time, 1, spell, target, owner, false);
             missile.SetToRemove();
         }
-
-
+    }
+    public class TaricDazzleStunMissile : ISpellScript
+    {
+        public SpellScriptMetadata ScriptMetadata => new SpellScriptMetadata()
+        {
+            TriggersSpellCasts = true,
+            IsDamagingSpell = true,
+            MissileParameters = new MissileParameters { Type = MissileType.Target }
+        };
     }
 }
