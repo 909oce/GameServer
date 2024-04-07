@@ -10,6 +10,7 @@ namespace Spells
 
         public void OnSpellPreCast(ObjAIBase owner, Spell spell, AttackableUnit target, Vector2 start, Vector2 end)
         {
+            ApiEventManager.OnLaunchAttack.AddListener(this, owner, OnLaunchAttack, true);
             if (owner.HasBuff("DariusNoxianTacticsONH"))
             {
                 OverrideAnimation(owner, "Spell2", "Attack1");
@@ -18,6 +19,10 @@ namespace Spells
             {
                 OverrideAnimation(owner, "Attack1", "Spell2");
             }
+        }
+        public void OnLaunchAttack(Spell spell)
+        {
+            spell.CastInfo.Owner.SetAutoAttackSpell("DariusBasicAttack", false);
         }
     }
     public class DariusBasicAttack2 : ISpellScript
@@ -30,6 +35,7 @@ namespace Spells
 
         public void OnSpellPreCast(ObjAIBase owner, Spell spell, AttackableUnit target, Vector2 start, Vector2 end)
         {
+            ApiEventManager.OnLaunchAttack.AddListener(this, owner, OnLaunchAttack, true);
             if (owner.HasBuff("DariusNoxianTacticsONH"))
             {
                 OverrideAnimation(owner, "Spell2", "Attack2");
@@ -38,6 +44,10 @@ namespace Spells
             {
                 OverrideAnimation(owner, "Attack2", "Spell2");
             }
+        }
+        public void OnLaunchAttack(Spell spell)
+        {
+            spell.CastInfo.Owner.SetAutoAttackSpell("DariusBasicAttack2", false);
         }
     }
     public class DariusCritAttack : ISpellScript
@@ -50,6 +60,7 @@ namespace Spells
 
         public void OnSpellPreCast(ObjAIBase owner, Spell spell, AttackableUnit target, Vector2 start, Vector2 end)
         {
+            ApiEventManager.OnLaunchAttack.AddListener(this, owner, OnLaunchAttack, true);
             if (owner.HasBuff("DariusNoxianTacticsONH"))
             {
                 OverrideAnimation(owner, "Spell2", "Crit");
@@ -58,6 +69,10 @@ namespace Spells
             {
                 OverrideAnimation(owner, "Crit", "Spell2");
             }
+        }
+        public void OnLaunchAttack(Spell spell)
+        {
+            spell.CastInfo.Owner.SetAutoAttackSpell("DariusCritAttack", false);
         }
     }
 }
